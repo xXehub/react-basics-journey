@@ -1,0 +1,264 @@
+{
+  "projectInfo": {
+    "title": "React Native Design Project",
+    "description": "Project untuk mempelajari design dan layout di React Native dengan berbagai screen dan komponen",
+    "totalSteps": 23
+  },
+  "steps": [
+    {
+      "stepNumber": 1,
+      "title": "Persiapan Struktur Project",
+      "description": "Sesuaikan struktur project yang ada dengan menambahkan folder-folder dan file-file yang dibutuhkan",
+      "type": "setup",
+      "actions": [
+        {
+          "action": "create_directories",
+          "directories": [
+            "screens",
+            "components"
+          ]
+        },
+        {
+          "action": "download_assets",
+          "note": "Download file-file assets pada link ini (link tidak tersedia dalam konteks)"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "stepNumber": 2,
+      "title": "Inisialisasi index.js pada Direktori /screens",
+      "description": "Terapkan pada file /screens/index.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "screens/index.js",
+      "fileContent": "import LotsOfStyles from \"./LotsOfStyles\";\nimport FixedDimensionsBasics from \"./FixedDimensionsBasics\";\nimport FlexDimensionsBasics from \"./FlexDimensionsBasics\";\nimport PercentageDimensionsBasics from \"./PercentageDimensionBasics\";\nimport FlexBasic from \"./FlexBasic\";\nimport FlexDirectionBasics from \"./FlexDirectionBasics\";\nimport JustifyContentBasics from \"./JustifyContentBasics\";\nimport AlignItemsLayout from \"./AlignItemsLayout\";\nimport WidthHeightBasics from \"./WidthHeightBasics\";\nimport PositionLayout from \"./PositionLayout\";\nimport DisplayAnImageWithStyle from \"./DisplayAnImageWithStyle\";\nimport NativeBaseBasic from \"./NativeBaseBasic\";\nexport {\n LotsOfStyles,\n FixedDimensionsBasics,\n FlexDimensionsBasics,\n PercentageDimensionsBasics,\n FlexBasic,\n FlexDirectionBasics,\n JustifyContentBasics,\n AlignItemsLayout,\n WidthHeightBasics,\n PositionLayout,\n DisplayAnImageWithStyle,\n NativeBaseBasic,\n};",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 3,
+      "title": "Inisialisasi index.js pada Direktori /components",
+      "description": "Terapkan pada file /components/index.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "components/index.js",
+      "fileContent": "import Button from \"./Button\";\nimport Header from \"./Header\";\nimport Separator from \"./Separator\";\nexport { Button, Header, Separator };",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 4,
+      "title": "Inisialisasi App.js",
+      "description": "Terapkan pada file App.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "App.js",
+      "fileContent": "import { useRef, useState } from \"react\";\nimport {\n View,\n DrawerLayoutAndroid,\n StatusBar,\n ScrollView,\n Text,\n StyleSheet,\n} from \"react-native\";\nimport { Header, Button, Separator } from \"./components\";\nimport {\n LotsOfStyles,\n FixedDimensionsBasics,\n FlexDimensionsBasics,\n PercentageDimensionsBasics,\n FlexBasic,\n FlexDirectionBasics,\n JustifyContentBasics,\n AlignItemsLayout,\n WidthHeightBasics,\n PositionLayout,\n DisplayAnImageWithStyle,\n NativeBaseBasic,\n} from \"./screens\";\n// Functional Component\nconst App = () => {\n // State Declaration\n const [page, setPage] = useState(\"Lots Of Styles\");\n // Ref Declaration\n const drawer = useRef(null);\n // Array of Object Declaration\n const pageArr = [\n { name: \"Lots Of Styles\", comp: <LotsOfStyles /> },\n { name: \"Fixed Dimensions Basics\", comp: <FixedDimensionsBasics /> },\n { name: \"Flex Dimensions Basics\", comp: <FlexDimensionsBasics /> },\n {\n name: \"Percentage Dimensions Basics\",\n comp: <PercentageDimensionsBasics />,\n },\n { name: \"Flex Basic\", comp: <FlexBasic /> },\n { name: \"Flex Direction Basics\", comp: <FlexDirectionBasics /> },\n { name: \"Justify Content Basics\", comp: <JustifyContentBasics /> },\n { name: \"Align Items Layout\", comp: <AlignItemsLayout /> },\n { name: \"Width Height Basics\", comp: <WidthHeightBasics /> },\n { name: \"Position Layout\", comp: <PositionLayout /> },\n { name: \"Display An Image With Style\", comp: <DisplayAnImageWithStyle /> },\n { name: \"Native Base Basic\", comp: <NativeBaseBasic /> },\n ];\n // Ref Declaration\n const content = useRef(pageArr[0]);\n // Find in Array of Object\n content.current = pageArr.find((item) => item.name == page);\n // Arrow Function inside Functional Component\n const changePage = (drawer, pageName) => {\n // Close Drawer\n drawer.current.closeDrawer();\n // Change state value\n setPage(pageName);\n };\n // Arrow Function inside Functional Component\n const navigationView = () => (\n <ScrollView style={styles.drawer}>\n <Text style={styles.textMenus}>MENUS:</Text>\n {/* Looping with map() */}\n {pageArr.map((item, index) => {\n return (\n <View key={index}>\n <Button\n text={item.name}\n onPress={() => changePage(drawer, item.name)}\n />\n <Separator height={10} />\n </View>\n );\n })}\n <Button text=\"Close\" onPress={() => drawer.current.closeDrawer()} />\n <Separator height={30} />\n </ScrollView>\n );\n return (\n <DrawerLayoutAndroid\n ref={drawer}\n drawerWidth={300}\n drawerPosition=\"left\"\n renderNavigationView={navigationView}\n >\n <StatusBar style=\"light\" backgroundColor=\"#AA0002\" />\n <View style={{ flex: 1 }}>\n <Header drawer={drawer} />\n {content.current.comp}\n </View>\n </DrawerLayoutAndroid>\n );\n};\nconst styles = StyleSheet.create({\n drawer: { padding: 10, backgroundColor: \"#222222\", flex: 1 },\n textMenus: {\n color: \"white\",\n fontSize: 12,\n marginBottom: 10,\n fontWeight: \"900\",\n },\n});\nexport default App;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 5,
+      "title": "Komponen Header",
+      "description": "Terapkan pada file Header.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "components/Header.js",
+      "fileContent": "import { View, TouchableOpacity, Image, StyleSheet } from \"react-native\";\n// Functional Component with props\nconst Header = (props) => {\n return (\n <View style={styles.header}>\n <TouchableOpacity onPress={() => props.drawer.current.openDrawer()}>\n <Image\n source={require(\"../assets/menu.png\")}\n style={{ width: 18, height: 18 }}\n />\n </TouchableOpacity>\n <View>\n <View style={styles.iconsView}>\n <Image\n source={require(\"../assets/facebook.png\")}\n style={styles.icons}\n />\n <Image\n source={require(\"../assets/youtube.png\")}\n style={styles.icons}\n />\n <Image\n source={require(\"../assets/twitter.png\")}\n style={styles.icons}\n />\n <Image\n source={require(\"../assets/search.png\")}\n style={styles.icons}\n />\n </View>\n </View>\n </View>\n );\n};\n// Styles\nconst styles = StyleSheet.create({\n header: {\n backgroundColor: \"#AA0002\",\n flexDirection: \"row\",\n justifyContent: \"space-between\",\n padding: 15,\n },\n iconsView: {\n flexDirection: \"row\",\n alignItems: \"center\",\n justifyContent: \"center\",\n },\n icons: {\n width: 36,\n height: 16,\n resizeMode: \"contain\",\n },\n});\nexport default Header;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 6,
+      "title": "Komponen Button",
+      "description": "Terapkan pada file Button.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "components/Button.js",
+      "fileContent": "import { TouchableOpacity, Text, StyleSheet } from \"react-native\";\n// Functional Component with props\nconst Button = (props) => {\n return (\n <TouchableOpacity style={styles.container} onPress={props.onPress}>\n <Text style={styles.text}>{props.text}</Text>\n </TouchableOpacity>\n );\n};\n// Styles\nconst styles = StyleSheet.create({\n container: {\n backgroundColor: \"#dddddd\",\n padding: 15,\n alignItems: \"center\",\n },\n text: {\n fontSize: 12,\n textTransform: \"uppercase\",\n fontWeight: \"bold\",\n },\n});\nexport default Button;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 7,
+      "title": "Komponen Separator",
+      "description": "Terapkan pada file Separator.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "components/Separator.js",
+      "fileContent": "import { View } from \"react-native\";\n// Functional Component with props\nconst Separator = (props) => {\n return <View style={{ height: props.height }}></View>;\n};\nexport default Separator;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 8,
+      "title": "Screen LotsOfStyles",
+      "description": "Terapkan pada file LotsOfStyles.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "screens/LotsOfStyles.js",
+      "fileContent": "import React from \"react\";\nimport { StyleSheet, Text, View } from \"react-native\";\nconst LotsOfStyles = () => {\n return (\n <View style={styles.container}>\n <Text style={styles.red}>just red</Text>\n <Text style={styles.bigBlue}>just bigBlue</Text>\n <Text style={[styles.bigBlue, styles.red]}>bigBlue, then red</Text>\n <Text style={[styles.red, styles.bigBlue]}>red, then bigBlue</Text>\n </View>\n );\n};\nconst styles = StyleSheet.create({\n container: {\n padding: 15,\n },\n bigBlue: {\n color: \"blue\",\n fontWeight: \"bold\",\n fontSize: 30,\n },\n red: {\n color: \"red\",\n },\n});\nexport default LotsOfStyles;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 9,
+      "title": "Screen FixedDimensionsBasics",
+      "description": "Terapkan pada file FixedDimensionsBasics.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "screens/FixedDimensionsBasics.js",
+      "fileContent": "import React from \"react\";\nimport { View } from \"react-native\";\nconst FixedDimensionsBasics = () => {\n return (\n <View>\n <View\n style={{\n width: 50,\n height: 50,\n backgroundColor: \"powderblue\",\n }}\n />\n <View\n style={{\n width: 100,\n height: 100,\n backgroundColor: \"skyblue\",\n }}\n />\n <View\n style={{\n width: 150,\n height: 150,\n backgroundColor: \"steelblue\",\n }}\n />\n </View>\n );\n};\nexport default FixedDimensionsBasics;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 10,
+      "title": "Screen FlexDimensionsBasics",
+      "description": "Terapkan pada file FlexDimensionsBasics.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "screens/FlexDimensionsBasics.js",
+      "fileContent": "import React from \"react\";\nimport { View } from \"react-native\";\nconst FlexDimensionsBasics = () => {\n return (\n <View style={{ flex: 1 }}>\n <View style={{ flex: 1, backgroundColor: \"powderblue\" }} />\n <View style={{ flex: 2, backgroundColor: \"skyblue\" }} />\n <View style={{ flex: 3, backgroundColor: \"steelblue\" }} />\n </View>\n );\n};\nexport default FlexDimensionsBasics;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 11,
+      "title": "Screen PercentageDimensionsBasics",
+      "description": "Terapkan pada file PercentageDimensionsBasics.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "screens/PercentageDimensionsBasics.js",
+      "fileContent": "import React from \"react\";\nimport { View } from \"react-native\";\nconst PercentageDimensionsBasics = () => {\n return (\n <View style={{ height: \"100%\" }}>\n <View\n style={{\n height: \"15%\",\n backgroundColor: \"powderblue\",\n }}\n />\n <View\n style={{\n width: \"66%\",\n height: \"35%\",\n backgroundColor: \"skyblue\",\n }}\n />\n <View\n style={{\n width: \"33%\",\n height: \"50%\",\n backgroundColor: \"steelblue\",\n }}\n />\n </View>\n );\n};\nexport default PercentageDimensionsBasics;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 12,
+      "title": "Screen FlexBasic",
+      "description": "Terapkan pada file FlexBasic.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "screens/FlexBasic.js",
+      "fileContent": "import React from \"react\";\nimport { StyleSheet, View } from \"react-native\";\nconst FlexBasic = () => {\n return (\n <View style={[styles.container, { flexDirection: \"column\" }]}>\n <View style={{ flex: 1, backgroundColor: \"red\" }} />\n <View style={{ flex: 2, backgroundColor: \"darkorange\" }} />\n <View style={{ flex: 3, backgroundColor: \"green\" }} />\n </View>\n );\n};\nconst styles = StyleSheet.create({\n container: {\n flex: 1,\n padding: 20,\n },\n});\nexport default FlexBasic;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 13,
+      "title": "Screen FlexDirectionBasics",
+      "description": "Terapkan pada file FlexDirectionBasics.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "screens/FlexDirectionBasics.js",
+      "fileContent": "import React, { useState } from \"react\";\nimport { StyleSheet, Text, TouchableOpacity, View } from \"react-native\";\nconst FlexDirectionBasics = () => {\n const [flexDirection, setflexDirection] = useState(\"column\");\n return (\n <PreviewLayout\n label=\"flexDirection\"\n values={[\"column\", \"row\", \"row-reverse\", \"column-reverse\"]}\n selectedValue={flexDirection}\n setSelectedValue={setflexDirection}\n >\n <View style={[styles.box, { backgroundColor: \"powderblue\" }]} />\n <View style={[styles.box, { backgroundColor: \"skyblue\" }]} />\n <View style={[styles.box, { backgroundColor: \"steelblue\" }]} />\n </PreviewLayout>\n );\n};\nconst PreviewLayout = ({\n label,\n children,\n values,\n selectedValue,\n setSelectedValue,\n}) => (\n <View style={{ padding: 10, flex: 1 }}>\n <Text style={styles.label}>{label}</Text>\n <View style={styles.row}>\n {values.map((value) => (\n <TouchableOpacity\n key={value}\n onPress={() => setSelectedValue(value)}\n style={[styles.button, selectedValue === value && styles.selected]}\n >\n <Text\n style={[\n styles.buttonLabel,\n selectedValue === value && styles.selectedLabel,\n ]}\n >\n {value}\n </Text>\n </TouchableOpacity>\n ))}\n </View>\n <View style={[styles.container, { [label]: selectedValue }]}>\n {children}\n </View>\n </View>\n);\nconst styles = StyleSheet.create({\n container: {\n flex: 1,\n marginTop: 8,\n backgroundColor: \"aliceblue\",\n },\n box: {\n width: 50,\n height: 50,\n },\n row: {\n flexDirection: \"row\",\n flexWrap: \"wrap\",\n },\n button: {\n paddingHorizontal: 8,\n paddingVertical: 6,\n borderRadius: 4,\n backgroundColor: \"oldlace\",\n alignSelf: \"flex-start\",\n marginHorizontal: \"1%\",\n marginBottom: 6,\n minWidth: \"48%\",\n textAlign: \"center\",\n },\n selected: {\n backgroundColor: \"coral\",\n borderWidth: 0,\n },\n buttonLabel: {\n fontSize: 12,\n fontWeight: \"500\",\n color: \"coral\",\n },\n selectedLabel: {\n color: \"white\",\n },\n label: {\n textAlign: \"center\",\n marginBottom: 10,\n fontSize: 24,\n },\n});\nexport default FlexDirectionBasics;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 14,
+      "title": "Screen JustifyContentBasics",
+      "description": "Terapkan pada file JustifyContentBasics.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "screens/JustifyContentBasics.js",
+      "fileContent": "import React, { useState } from \"react\";\nimport { View, TouchableOpacity, Text, StyleSheet } from \"react-native\";\nconst JustifyContentBasics = () => {\n const [justifyContent, setJustifyContent] = useState(\"flex-start\");\n return (\n <PreviewLayout\n label=\"justifyContent\"\n selectedValue={justifyContent}\n values={[\n \"flex-start\",\n \"flex-end\",\n \"center\",\n \"space-between\",\n \"space-around\",\n \"space-evenly\",\n ]}\n setSelectedValue={setJustifyContent}\n >\n <View style={[styles.box, { backgroundColor: \"powderblue\" }]} />\n <View style={[styles.box, { backgroundColor: \"skyblue\" }]} />\n <View style={[styles.box, { backgroundColor: \"steelblue\" }]} />\n </PreviewLayout>\n );\n};\nconst PreviewLayout = ({\n label,\n children,\n values,\n selectedValue,\n setSelectedValue,\n}) => (\n <View style={{ padding: 10, flex: 1 }}>\n <Text style={styles.label}>{label}</Text>\n <View style={styles.row}>\n {values.map((value) => (\n <TouchableOpacity\n key={value}\n onPress={() => setSelectedValue(value)}\n style={[styles.button, selectedValue === value && styles.selected]}\n >\n <Text\n style={[\n styles.buttonLabel,\n selectedValue === value && styles.selectedLabel,\n ]}\n >\n {value}\n </Text>\n </TouchableOpacity>\n ))}\n </View>\n <View style={[styles.container, { [label]: selectedValue }]}>\n {children}\n </View>\n </View>\n);\nconst styles = StyleSheet.create({\n container: {\n flexDirection: \"column\",\n flex: 1,\n marginTop: 8,\n backgroundColor: \"aliceblue\",\n },\n box: {\n width: 50,\n height: 50,\n },\n row: {\n flexDirection: \"row\",\n flexWrap: \"wrap\",\n },\n button: {\n paddingHorizontal: 8,\n paddingVertical: 6,\n borderRadius: 4,\n backgroundColor: \"oldlace\",\n alignSelf: \"flex-start\",\n marginHorizontal: \"1%\",\n marginBottom: 6,\n minWidth: \"48%\",\n textAlign: \"center\",\n },\n selected: {\n backgroundColor: \"coral\",\n borderWidth: 0,\n },\n buttonLabel: {\n fontSize: 12,\n fontWeight: \"500\",\n color: \"coral\",\n },\n selectedLabel: {\n color: \"white\",\n },\n label: {\n textAlign: \"center\",\n marginBottom: 10,\n fontSize: 24,\n },\n});\nexport default JustifyContentBasics;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 15,
+      "title": "Screen AlignItemsLayout",
+      "description": "Terapkan pada file AlignItemsLayout.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "screens/AlignItemsLayout.js",
+      "fileContent": "import React, { useState } from \"react\";\nimport { View, TouchableOpacity, Text, StyleSheet } from \"react-native\";\nconst AlignItemsLayout = () => {\n const [alignItems, setAlignItems] = useState(\"stretch\");\n return (\n <PreviewLayout\n label=\"alignItems\"\n selectedValue={alignItems}\n values={[\"stretch\", \"flex-start\", \"flex-end\", \"center\", \"baseline\"]}\n setSelectedValue={setAlignItems}\n >\n <View style={[styles.box, { backgroundColor: \"powderblue\" }]} />\n <View style={[styles.box, { backgroundColor: \"skyblue\" }]} />\n <View\n style={[\n styles.box,\n {\n backgroundColor: \"steelblue\",\n width: \"auto\",\n minWidth: 50,\n },\n ]}\n />\n </PreviewLayout>\n );\n};\nconst PreviewLayout = ({\n label,\n children,\n values,\n selectedValue,\n setSelectedValue,\n}) => (\n <View style={{ padding: 10, flex: 1 }}>\n <Text style={styles.label}>{label}</Text>\n <View style={styles.row}>\n {values.map((value) => (\n <TouchableOpacity\n key={value}\n onPress={() => setSelectedValue(value)}\n style={[styles.button, selectedValue === value && styles.selected]}\n >\n <Text\n style={[\n styles.buttonLabel,\n selectedValue === value && styles.selectedLabel,\n ]}\n >\n {value}\n </Text>\n </TouchableOpacity>\n ))}\n </View>\n <View style={[styles.container, { [label]: selectedValue }]}>\n {children}\n </View>\n </View>\n);\nconst styles = StyleSheet.create({\n container: {\n flex: 1,\n marginTop: 8,\n backgroundColor: \"aliceblue\",\n minHeight: 200,\n },\n box: {\n width: 50,\n height: 50,\n },\n row: {\n flexDirection: \"row\",\n flexWrap: \"wrap\",\n },\n button: {\n paddingHorizontal: 8,\n paddingVertical: 6,\n borderRadius: 4,\n backgroundColor: \"oldlace\",\n alignSelf: \"flex-start\",\n marginHorizontal: \"1%\",\n marginBottom: 6,\n minWidth: \"48%\",\n textAlign: \"center\",\n },\n selected: {\n backgroundColor: \"coral\",\n borderWidth: 0,\n },\n buttonLabel: {\n fontSize: 12,\n fontWeight: \"500\",\n color: \"coral\",\n },\n selectedLabel: {\n color: \"white\",\n },\n label: {\n textAlign: \"center\",\n marginBottom: 10,\n fontSize: 24,\n },\n});\nexport default AlignItemsLayout;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 16,
+      "title": "Screen WidthHeightBasics",
+      "description": "Terapkan pada file WidthHeightBasics.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "screens/WidthHeightBasics.js",
+      "fileContent": "import React, { useState } from \"react\";\nimport {\n View,\n SafeAreaView,\n TouchableOpacity,\n Text,\n StyleSheet,\n} from \"react-native\";\nconst WidthHeightBasics = () => {\n const [widthType, setWidthType] = useState(\"auto\");\n const [heightType, setHeightType] = useState(\"auto\");\n return (\n <PreviewLayout\n widthType={widthType}\n heightType={heightType}\n widthValues={[\"auto\", 200, \"80%\"]}\n heightValues={[\"auto\", 200, \"60%\"]}\n setWidthType={setWidthType}\n setHeightType={setHeightType}\n >\n <View\n style={{\n alignSelf: \"flex-start\",\n backgroundColor: \"aliceblue\",\n height: heightType,\n width: widthType,\n padding: 15,\n }}\n >\n <View style={[styles.box, { backgroundColor: \"powderblue\" }]} />\n <View style={[styles.box, { backgroundColor: \"skyblue\" }]} />\n <View style={[styles.box, { backgroundColor: \"steelblue\" }]} />\n </View>\n </PreviewLayout>\n );\n};\nconst PreviewLayout = ({\n children,\n widthType,\n heightType,\n widthValues,\n heightValues,\n setWidthType,\n setHeightType,\n}) => (\n <SafeAreaView style={{ flex: 1, padding: 10 }}>\n <View style={styles.row}>\n <Text style={styles.label}>width </Text>\n {widthValues.map((value) => (\n <TouchableOpacity\n key={value}\n onPress={() => setWidthType(value)}\n style={[styles.button, widthType === value && styles.selected]}\n >\n <Text\n style={[\n styles.buttonLabel,\n widthType === value && styles.selectedLabel,\n ]}\n >\n {value}\n </Text>\n </TouchableOpacity>\n ))}\n </View>\n <View style={styles.row}>\n <Text style={styles.label}>height </Text>\n {heightValues.map((value) => (\n <TouchableOpacity\n key={value}\n onPress={() => setHeightType(value)}\n style={[styles.button, heightType === value && styles.selected]}\n >\n <Text\n style={[\n styles.buttonLabel,\n heightType === value && styles.selectedLabel,\n ]}\n >\n {value}\n </Text>\n </TouchableOpacity>\n ))}\n </View>\n {children}\n </SafeAreaView>\n);\nconst styles = StyleSheet.create({\n box: {\n width: 50,\n height: 50,\n },\n row: {\n flexDirection: \"row\",\n flexWrap: \"wrap\",\n },\n button: {\n padding: 8,\n borderRadius: 4,\n backgroundColor: \"oldlace\",\n alignSelf: \"flex-start\",\n marginRight: 10,\n marginBottom: 10,\n },\n selected: {\n backgroundColor: \"coral\",\n shadowOpacity: 0,\n borderWidth: 0,\n },\n buttonLabel: {\n fontSize: 12,\n fontWeight: \"500\",\n color: \"coral\",\n },\n selectedLabel: {\n color: \"white\",\n },\n label: {\n textAlign: \"center\",\n marginBottom: 10,\n fontSize: 24,\n },\n});\nexport default WidthHeightBasics;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 17,
+      "title": "Screen PositionLayout",
+      "description": "Terapkan pada file PositionLayout.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "screens/PositionLayout.js",
+      "fileContent": "import React, { useState } from \"react\";\nimport {\n View,\n SafeAreaView,\n TouchableOpacity,\n Text,\n StyleSheet,\n} from \"react-native\";\nconst PositionLayout = () => {\n const [position, setPosition] = useState(\"relative\");\n return (\n <PreviewLayout\n label=\"position\"\n selectedValue={position}\n values={[\"relative\", \"absolute\"]}\n setSelectedValue={setPosition}\n >\n <View\n style={[\n styles.box,\n {\n top: 25,\n left: 25,\n position,\n backgroundColor: \"powderblue\",\n },\n ]}\n />\n <View\n style={[\n styles.box,\n {\n top: 50,\n left: 50,\n position,\n backgroundColor: \"skyblue\",\n },\n ]}\n />\n <View\n style={[\n styles.box,\n {\n top: 75,\n left: 75,\n position,\n backgroundColor: \"steelblue\",\n },\n ]}\n />\n </PreviewLayout>\n );\n};\nconst PreviewLayout = ({\n label,\n children,\n values,\n selectedValue,\n setSelectedValue,\n}) => (\n <View style={{ padding: 10, flex: 1 }}>\n <Text style={styles.label}>{label}</Text>\n <View style={styles.row}>\n {values.map((value) => (\n <TouchableOpacity\n key={value}\n onPress={() => setSelectedValue(value)}\n style={[styles.button, selectedValue === value && styles.selected]}\n >\n <Text\n style={[\n styles.buttonLabel,\n selectedValue === value && styles.selectedLabel,\n ]}\n >\n {value}\n </Text>\n </TouchableOpacity>\n ))}\n </View>\n <View style={styles.container}>{children}</View>\n </View>\n);\nconst styles = StyleSheet.create({\n container: {\n flex: 1,\n marginTop: 8,\n backgroundColor: \"aliceblue\",\n minHeight: 200,\n },\n box: {\n width: 50,\n height: 50,\n },\n row: {\n flexDirection: \"row\",\n flexWrap: \"wrap\",\n },\n button: {\n paddingHorizontal: 8,\n paddingVertical: 6,\n borderRadius: 4,\n backgroundColor: \"oldlace\",\n alignSelf: \"flex-start\",\n marginHorizontal: \"1%\",\n marginBottom: 6,\n minWidth: \"48%\",\n textAlign: \"center\",\n },\n selected: {\n backgroundColor: \"coral\",\n borderWidth: 0,\n },\n buttonLabel: {\n fontSize: 12,\n fontWeight: \"500\",\n color: \"coral\",\n },\n selectedLabel: {\n color: \"white\",\n },\n label: {\n textAlign: \"center\",\n marginBottom: 10,\n fontSize: 24,\n },\n});\nexport default PositionLayout;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 18,
+      "title": "Screen DisplayAnImageWithStyle",
+      "description": "Terapkan pada file DisplayAnImageWithStyle.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "screens/DisplayAnImageWithStyle.js",
+      "fileContent": "import React from \"react\";\nimport { View, Image, Text, StyleSheet, ScrollView } from \"react-native\";\nimport { Separator } from \"../components\";\nconst DisplayAnImageWithStyle = () => {\n return (\n <ScrollView>\n <View style={styles.container}>\n <View>\n <Image\n style={{\n resizeMode: \"cover\",\n ...styles.image,\n }}\n source={require(\"../assets/js.png\")}\n />\n <Text>resizeMode : cover</Text>\n </View>\n <Separator height={30} />\n <View>\n <Image\n style={{\n resizeMode: \"contain\",\n ...styles.image,\n }}\n source={require(\"../assets/js.png\")}\n />\n <Text>resizeMode : contain</Text>\n </View>\n <Separator height={30} />\n <View>\n <Image\n style={{\n resizeMode: \"stretch\",\n ...styles.image,\n }}\n source={require(\"../assets/js.png\")}\n />\n <Text>resizeMode : stretch</Text>\n </View>\n <Separator height={30} />\n <View>\n <Image\n style={{\n resizeMode: \"repeat\",\n ...styles.image,\n }}\n source={require(\"../assets/js.png\")}\n />\n <Text>resizeMode : repeat</Text>\n </View>\n <Separator height={30} />\n <View>\n <Image\n style={{\n resizeMode: \"center\",\n ...styles.image,\n }}\n source={require(\"../assets/js.png\")}\n />\n <Text>resizeMode : center</Text>\n </View>\n </View>\n </ScrollView>\n );\n};\nconst styles = StyleSheet.create({\n container: {\n justifyContent: \"center\",\n alignItems: \"center\",\n padding: 30,\n },\n image: {\n height: 100,\n width: 200,\n backgroundColor: \"grey\",\n },\n});\nexport default DisplayAnImageWithStyle;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 19,
+      "title": "Install NativeBase",
+      "description": "Install NativeBase dan dependencies nya dengan mengeksekusi command pada terminal",
+      "type": "installation",
+      "commands": [
+        "npm install native-base --legacy-peer-deps",
+        "npm install react-native-svg --legacy-peer-deps",
+        "npm install react-native-safe-area-context --legacy-peer-deps"
+      ],
+      "status": "pending"
+    },
+    {
+      "stepNumber": 20,
+      "title": "Patch NativeBase (Jika Muncul Warning SSRProvider)",
+      "description": "Melakukan patch pada NativeBase untuk mengatasi warning SSRProvider",
+      "type": "patch",
+      "actions": [
+        {
+          "action": "edit_file",
+          "filePath": "node_modules/native-base/src/core/NativeBaseProvider.tsx",
+          "lineNumber": 97,
+          "oldCode": "<SSRProvider>{children}</SSRProvider>",
+          "newCode": "{React.version >= '18' ? children : <SSRProvider>{children}</SSRProvider>}"
+        },
+        {
+          "action": "run_command",
+          "command": "npx patch-package native-base"
+        },
+        {
+          "action": "restart_expo",
+          "description": "Jalankan ulang service Expo"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "stepNumber": 21,
+      "title": "Screen NativeBaseBasic",
+      "description": "Terapkan pada file NativeBaseBasic.js kode program React Native",
+      "type": "file_creation",
+      "filePath": "screens/NativeBaseBasic.js",
+      "fileContent": "import React from \"react\";\nimport { NativeBaseProvider, Center, Heading } from \"native-base\";\nconst NativeBaseBasic = () => {\n return (\n <NativeBaseProvider>\n <Center flex={1}>\n <Heading>Native Base</Heading>\n </Center>\n </NativeBaseProvider>\n );\n};\nexport default NativeBaseBasic;",
+      "status": "pending"
+    },
+    {
+      "stepNumber": 22,
+      "title": "[Update] Install Gluestack UI (Alternatif)",
+      "description": "Pada blog resmi NativeBase disampaikan bahwa mereka akan migrasi ke Gluestack UI",
+      "type": "note",
+      "note": "Ini adalah informasi tambahan tentang alternatif NativeBase dengan Gluestack UI",
+      "status": "pending"
+    }
+  ],
+  "workflow": {
+    "phase1": {
+      "title": "Setup & Structure",
+      "steps": [1, 2, 3]
+    },
+    "phase2": {
+      "title": "Main App & Components",
+      "steps": [4, 5, 6, 7]
+    },
+    "phase3": {
+      "title": "Basic Screens",
+      "steps": [8, 9, 10, 11, 12]
+    },
+    "phase4": {
+      "title": "Interactive Screens",
+      "steps": [13, 14, 15, 16, 17]
+    },
+    "phase5": {
+      "title": "Image & UI Library",
+      "steps": [18, 19, 20, 21, 22]
+    }
+  },
+  "notes": [
+    "File assets perlu didownload sesuai dengan link yang disediakan (tidak tersedia dalam konteks)",
+    "Pastikan struktur folder sudah sesuai sebelum membuat file",
+    "Setiap step harus dikerjakan sesuai urutan untuk menghindari error dependency",
+    "File yang menggunakan import PercentageDimensionBasics harus disesuaikan dengan nama file PercentageDimensionsBasics",
+    "Patch NativeBase hanya dilakukan jika muncul warning SSRProvider"
+  ]
+}
